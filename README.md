@@ -16,6 +16,6 @@ A web application where users can create and manage scheduler events that comply
 1) Install dependencies using `npm install`
 2) Rename `.env.default` to `.env` and set environment variables such as your mongoDB instance uri.
 
-### Scripts 
+## Scripts 
 * `npm run start` - Spins up server.
 * `npm run start-dev` - Spins up server using nodemon for hot reloading.
