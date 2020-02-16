@@ -1,3 +1,8 @@
+/**
+ * Creates connection to mongoDB via mongoose
+ * using URI defined in an environment variable.
+ */
+
 const mongoose = require('mongoose');
 
 const { DB_URI } = process.env;
