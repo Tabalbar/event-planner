@@ -1,11 +1,11 @@
-const express = require('express');
-require('dotenv').config(); // allows importing .env file constants into env variables
-require('./db');
-
 /**
  * Entry point of the application.
  * Uses express for routing.
  */
+
+const express = require('express');
+require('dotenv').config(); // allows importing .env file constants into env variables
+require('./db');
 
 const { PORT } = process.env; // env variables
 
