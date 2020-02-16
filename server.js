@@ -6,11 +6,9 @@
 const express = require('express');
 require('dotenv').config(); // allows importing .env file constants into env variables
 require('./db');
+const apiRouter = require('./routes/api');
 
 const { PORT } = process.env; // env variables
-
-// import routes
-const apiRouter = require('./routes/api');
 
 const app = express();
 
