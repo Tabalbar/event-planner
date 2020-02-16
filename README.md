@@ -1,5 +1,5 @@
 # Event Planner 
-A web application where users can create and manage scheduler events that comply to the iCalendar specification. uses a RESTful API for a backend service.
+A web application where users can create and manage scheduler events that comply to the iCalendar specification. Uses a RESTful API for a backend service.
 
 ## Primary tools used
 * NodeJS 
