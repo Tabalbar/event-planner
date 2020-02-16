@@ -1,13 +1,22 @@
-const router = require('express').Router();
-const { getEvents } = require('../controllers/events');
+/**
+ * Defines api endpoints related to events.
+ * Binds url paths with cotroller functions.
+ */
+
+// {mergParams: true} option used to allow parent route to access this child routes args.
+const router = require('express').Router({ mergeParams: true });
+
+// event controller funcs
+const { getEvents, createEvent } = require('../../controllers/events');
 
 // url paths
 const PATHS = {
   EVENTS: 'events',
   GET: 'get',
-  ALL: 'all',
+  CREATE: 'create',
 };
 
-router.get(`/${PATHS.EVENTS}/${PATHS.GET}/${PATHS.ALL}`, getEvents);
+router.get(`/${PATHS.EVENTS}/${PATHS.GET}`, getEvents);
+router.post(`/${PATHS.EVENTS}/${PATHS.CREATE}`, createEvent);
 
-exports.default = router;
+module.exports = router;
