@@ -1,26 +1,64 @@
-const events = [
-  {
-    id: 1,
-    name: 'Create an App.',
-    date: '2/15/2020',
-    description: 'Make sure to create an app today.',
-  },
-  {
-    id: 2,
-    name: 'Brush teeth',
-    date: '2/15/2020',
-    description: 'Make sure to create an brush teeth today.',
-  },
-  {
-    id: 3,
-    name: 'Go to sleep.',
-    date: '2/15/2020',
-    description: 'Make sure to get sleep today.',
-  },
-];
+/**
+ * Defines controller functions related to events.
+ * All functions are async to play nice with model functions.
+ */
 
-function getEvents(req, res) {
-  res.status(200).toJSON(events);
+const eventModel = require('../models/event');
+
+/**
+ * Gets all events.
+ *
+ * @param req {{}}
+ * @param res {{}}
+ * @returns {Promise<*>}
+ */
+async function getEvents(req, res) {
+  let events;
+  try {
+    // get all events
+    events = await eventModel.getAll();
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('Failed to get events');
+    return res.status(400).json({ error: 'failed to get events' });
+  }
+  return res.status(200).json({ events });
 }
 
-module.exports = { getEvents };
+/**
+ * Creates an event.
+ * Should be used in a POST request
+ * @param req {{body: {name: string, date: string, description: string}}}
+ * @param res {{}}
+ * @returns {Promise<*>}
+ */
+async function createEvent(req, res) {
+  const { name, date, description } = req.body;
+  let event;
+
+  if (name === undefined) {
+    return res.status(400).json({ error: 'missing param' });
+  }
+
+  if (date === undefined) {
+    return res.status(400).json({ error: 'missing date param' });
+  }
+
+  if (description === undefined) {
+    return res.status(400).json({ error: 'missing description param' });
+  }
+
+  try {
+    event = await eventModel.create({ name, date, description });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('Failed to create event');
+    return res.status(400).json({ error: 'failed to create event' });
+  }
+  return res.status(200).json({ event });
+}
+
+module.exports = {
+  getEvents,
+  createEvent,
+};
