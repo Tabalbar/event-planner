@@ -8,7 +8,7 @@ require('dotenv').config(); // allows importing .env file constants into env var
 require('./db');
 const apiRouter = require('./routes/api');
 
-const { PORT } = process.env; // env variables
+const { SERVER_PORT } = process.env; // env variables
 
 const app = express();
 
@@ -18,4 +18,4 @@ app.use(express.json()); // middleware for POSTing json data
 app.use(apiRouter);
 
 // eslint-disable-next-line no-console
-app.listen(PORT, () => console.log(`app listening on port: ${PORT}`));
+app.listen(SERVER_PORT, () => console.log(`app listening on port: ${SERVER_PORT}`));
