@@ -14,6 +14,8 @@ const mongoose = require('mongoose');
 const eventErrors = {
   fetchAll: new Error('Failed to fetch events'),
   create: new Error('Failed to create event'),
+  startDateTimeIsNotDate: new Error('startDateTime is not a Date object'),
+  endDateTimeIsNotDate: new Error('endDateTime is not a Date object'),
 };
 
 // mongoose model name.
@@ -24,8 +26,9 @@ const EVENT = 'Event';
 
 const eventSchema = new mongoose.Schema({
   name: 'string',
-  date: 'string',
   description: 'string',
+  startDateTime: 'string',
+  endDateTime: 'string',
 });
 const MongooseModel = mongoose.model(EVENT, eventSchema);
 
@@ -50,14 +53,53 @@ async function getAll() {
 }
 
 /**
+ * Helper func to check if is date
+ * @param {*} date
+ * @return {boolean}
+ */
+function isDate(date) {
+  if (!(date instanceof Date)) {
+    return false;
+  }
+  // eslint-disable-next-line no-restricted-globals
+  if (isNaN(date)) {
+    return false;
+  }
+  return true;
+}
+
+
+/**
  * @param {{name: string, date: string, description: string}} newEventArgs
  * @returns {Promise<*>}
  */
 async function create(newEventArgs) {
   // use object destructuring in-case additional args are passed.
-  const { name, date, description } = newEventArgs;
+  const {
+    name,
+    description,
+    startDateTime,
+    endDateTime,
+  } = newEventArgs;
+
+  // throw errors if startDateTime, endDateTime are not Date() objects
+  if (!isDate(startDateTime)) {
+    throw eventErrors.startDateTimeIsNotDate;
+  }
+
+  if (!isDate(endDateTime)) {
+    throw eventErrors.endDateTimeIsNotDate;
+  }
+
   try {
-    const event = new MongooseModel({ name, date, description });
+    const event = new MongooseModel(
+      {
+        name,
+        description,
+        startDateTime,
+        endDateTime,
+      },
+    );
     await event.save();
     return event;
   } catch (e) {
