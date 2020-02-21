@@ -16,18 +16,18 @@ const modelErrors = eventModel.eventErrors;
  */
 function getErrorMsg(e) {
   switch (e) {
-    case (modelErrors.startDateTimeIsNotDate): {
+    case (modelErrors.startDateTimeIsNotDate):
       return 'Given startDateTime is not a date';
-    }
-    case (modelErrors.endDateTimeIsNotDate): {
+
+    case (modelErrors.endDateTimeIsNotDate):
       return 'Given endDateTime is not a date';
-    }
-    case (modelErrors.create): {
+
+    case (modelErrors.create):
       return 'Error creating an event';
-    }
-    case (modelErrors.fetchAll): {
+
+    case (modelErrors.fetchAll):
       return 'Error fetching events';
-    }
+
     default:
       return 'Error making request';
   }
