@@ -3,6 +3,8 @@ import {
   Grid, Icon, Button, Header,
 } from 'semantic-ui-react';
 import ComponentExample from '../components/ComponentExample';
+import DateTimeForm from "../components/Calendar";
+import CreateEvent from "../components/CreateEvent";
 
 
 function MainCalendarPage() {
@@ -32,18 +34,15 @@ function MainCalendarPage() {
 
         <Grid.Row>
           <Grid.Column width={3}>
-            <Button>
+            <CreateEvent>
               <Icon name="add" />
-            </Button>
+            </CreateEvent>
           </Grid.Column>
-          <Grid.Column width={13}>
+          <Grid.Column width={9}>
+            <DateTimeForm/>
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <h1>This is part of a eeeepage component</h1>
-      <ComponentExample componentNumber={1} />
-      <ComponentExample componentNumber={2} />
-      <ComponentExample componentNumber={3} />
     </>
   );
 }

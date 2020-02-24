@@ -1,11 +1,11 @@
 import React from 'react';
 import { Header, Icon } from 'semantic-ui-react';
+import '../style.css';
 
-
-function NavBar({ componentNumber }) {
+function NavBar() {
   return (
     <div className="ui borderless topmenu menu">
-      <Header>
+      <Header as="h3" className="content">
         <Icon name="calendar" size="large" />
         Daikon Calendar
       </Header>
